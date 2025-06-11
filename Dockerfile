@@ -9,7 +9,7 @@ WORKDIR /app
 COPY  build/libs/helloWeb-0.0.1.jar app.jar
 # app.jar는 변경된 파일명
 
-#공개 포트 설정(필수 아님)
+#공개 포트 설정
 EXPOSE 8080
 
 #실행
