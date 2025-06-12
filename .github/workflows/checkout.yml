@@ -6,7 +6,7 @@ env: # 환경 설정 변수
   REPOSITORY_NAME: hello-web:latest
   
 jobs: #단계별 실행할 작업들
-  checkout:
+  build:
     runs-on: ubuntu-latest #runs-on은 가상 머신 운영체제 의미. 여기서는 우분투 최신버전
     steps:
       - uses: actions/checkout@v3 #uses는 GitHub Action에서 사용할 명령어
@@ -36,4 +36,21 @@ jobs: #단계별 실행할 작업들
       - name: docker hub push
         run: docker push seungju0104/${{env.REPOSITYORY_NAME}}
 
+  deploy:
+    needs: build
+    name: 서버에 배포 단계
+    runs-on: [ self-hosted, label-go2 ] # 어디서 실행할지 명시하는 부분 # Action과 외부 서버 연동 설정시 작성한 추가 Label명 사용
+    steps:
+    - name: 운영서버에서 Docker Hub에 로그인
+      uses: docker/login-action@v1
+      with:
+        username: ${{secrets.USERNAME}} # ${{secrets.???}}으로 외부에 보이지 않게 보안처리 가능
+        password: ${{secrets.PASSWORD}} # ${{secrets.???}}으로 외부에 보이지 않게 보안처리 가능
+
+    - name: docker-compose에서 이미지 다운로드
+      run: | # | 는 실행할 명령어가 여러개일 때 사용 # 실제 docker-compose.yml 파일이 있는 위치로 이동해서 실행해야한다.
+        cd ~/ 
+        docker-compose down
+        docker-compose pull
+        docker-compose up -d
 # GitHub에서 작성해 저장하면 자동으로 Commit과 Push가 수행된다.
