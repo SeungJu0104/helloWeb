@@ -30,7 +30,7 @@ jobs: #단계별 실행할 작업들
           username: ${{secrets.USERNAME}} # ${{secrets.???}}으로 외부에 보이지 않게 보안처리 가능
           password: ${{secrets.PASSWORD}} # ${{secrets.???}}으로 외부에 보이지 않게 보안처리 가능
           # GitHub 내 해당 프로젝트 설정에서 Security의 Actions에 변수명을 맞춰서 등록하면 쓸 수 있다.
-      - name: docker image build
+      - name: docker image build 
         run: docker build -t seungju0104/${{env.REPOSITYORY_NAME}} .
 
       - name: docker hub push
