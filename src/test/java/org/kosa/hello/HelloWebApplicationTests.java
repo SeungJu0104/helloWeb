@@ -22,7 +22,7 @@ class HelloWebApplicationTests {
 		int a = 10, b = 20;
 		int sum = add(a, b);
 		
-		assertEquals(40, sum); // 실 테스트 코드
+		assertEquals(30, sum); // 실 테스트 코드
 		
 	}
 	
