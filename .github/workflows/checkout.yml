@@ -19,7 +19,11 @@ jobs: #단계별 실행할 작업들
 
       - name: build grant Authorization
         run: chmod +x gradlew
-          
+
+      - name: test gradlew
+        run: ./gradlew --info test #테스트 코드 실행한다. 없으면 테스트 코드 따로 수행하지 않는다.
+        # 테스트 코드 실행은 리눅스 코드를 직접 치지 않아도, 찾아보면 GitHub Action에서 제공해주는 것도 있으므로, 선택해서 사용해도 된다.
+      
       - name: build gradlew
         run: ./gradlew bootJar
         
