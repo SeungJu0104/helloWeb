@@ -9,7 +9,7 @@ jobs: #단계별 실행할 작업들
       - uses: actions/checkout@v3 #uses는 GitHub Action에서 사용할 명령어
       
       - name: Set up JDK17
-        uses: actions.setup-java@3
+        uses: actions/setup-java@3 #GitHub Action에서 설치 제공
         with:
           java-vesrion: '17'
           distrubution: 'temurin' #배포도 있어야한다.
