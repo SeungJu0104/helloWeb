@@ -1,7 +1,7 @@
 name: Our Workflow
 on: 
   push: # 동작시 어떤 것을 가지고 동작할 것인가
-    branches: [Main]
+    branches: [main]
 jobs: #단계별 실행할 작업들
   checkout:
     runs-on: ubuntu-latest #runs-on은 가상 머신 운영체제 의미. 여기서는 우분투 최신버전
@@ -13,9 +13,13 @@ jobs: #단계별 실행할 작업들
         with:
           java-vesrion: '17'
           distrubution: 'temurin' #배포도 있어야한다.
+
+      - name: build grant Authorization
+        run: chmod +x gradlew
           
-      - name: build
+      - name: build gradlew
         run: ./gradlew bootJar
+        
 
       - name: docker hub login
         uses: docker/login-action@v1 #docker 로그인은 GitHub Action에서 제공
